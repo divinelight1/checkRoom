@@ -110,8 +110,9 @@ textarea {
 .mdl-textfield.mdl-js-textfield.is-upgraded {
     width: 100% !important;
 }
-
-
+.mdl-card__actions.mdl-card--border {
+    border-top: none;
+}
 
 
     
