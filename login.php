@@ -57,6 +57,9 @@ if (isset($_POST['login'])) {
 </button>
   </div>
   </form>
+ <a  href="./registration.php"> <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+  Dont have account?register!
+</button></a>
   <div class="mdl-card__menu">
     <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
       <i class="material-icons">share</i>
