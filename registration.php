@@ -1,35 +1,22 @@
 <?php 
-
-//connect to database
 include('./includes/connection.php');
+session_start();
 
-//check if session is set
-if (isset($_POST['username'])) {
-	session_start();
-	header('location: index.php');
-}
+  // submit data
+  if (isset($_POST["register"])) {
+    if (empty($_POST["username"]) || empty($_POST["password"])) {
+          echo '<script>alert("you must fill both fields")</script>';
+    }else{
+      $username = mysqli_real_escape_string($connect, $_POST["username"]);
+       $password = mysqli_real_escape_string($connect, $_POST["password"]);
+       $password = sha1($password);
+       $query = "INSERT INTO admin (username, password) VALUES('$username', '$password')";
+       if (mysqli_query($connect, $query)) {
+         echo '<script>alert("registration done");</script>';
+       };
+    };
+  };
 
-
-
-//submit data
-if (isset($_POST['login'])) {
-	if (empty($_POST['username']) || empty($_POST['password'])) {
-		echo '<script>alert("you must fill both fields to login")</script>';
-	}else{
-	  $username = mysqli_real_escape_string($connect, $_POST["username"]);
-      $password = mysqli_real_escape_string($connect, $_POST["password"]);
-      $password = sha1($password);
-      $query = "SELECT * from admin WHERE username = '$username' AND password = '$password'";
-      $result = mysqli_query($connect, $query);
-      if (mysqli_num_rows($result) > 0 ) {
-        $_SESSION['username'] = $username;
-        //$_SESSION['username'];
-        header("location: index.php");
-      }else{
-        echo '<script>alert("please register first")</script>';
-      }
-	}
-}
 ?>
 
 <?php include('./includes/header.php'); ?>
@@ -52,7 +39,7 @@ if (isset($_POST['login'])) {
   </div>
   <div class="mdl-card__actions mdl-card--border">
     <!-- Accent-colored raised button with ripple -->
-<button type="submit" name="login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >
+<button type="submit" name="register" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >
   login
 </button>
   </div>
